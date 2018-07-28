@@ -66,10 +66,22 @@
         dest: /etc/apache2/conf-enabled/php7.0-fpm.conf                                   
         force: yes
 
-    - name: Create database
+    - name: Create opencart database
       mysql_db:
         name: opencart
         state: present
+
+    - name: Set mariadb password
+      mysql_user:
+        name: root
+        password: "subutai"
+        login_password: "subutai"
+        check_implicit_admin: yes
+        state: present
+
+    - name: Allow access from network
+      raw: mysql -u root -p"subutai" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'subutai'; FLUSH PRIVILEGES;";
+      ignore_errors: yes
 
     - name: Download and unzip
       unarchive: 
