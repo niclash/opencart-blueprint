@@ -25,6 +25,7 @@
         - php-opcache
         - php-readline
         - php-json
+        - php-zip
         - php-cli
         - python-mysqldb
         - wget
@@ -98,22 +99,17 @@
         state: directory
 
     - name: Copy application content
-      copy:
-        src: /tmp/opencart-3.0.2.0/upload/
-        dest: /var/www/html/
-        recursive: yes
-        owner: www-data
-        group: www-data
+      raw: cp -r /tmp/opencart-*/upload/* /var/www/html/
 
     - name: Move App config file
-      copy:
-        src: /var/www/html/config-dist.php
-        dest: /var/www/html/config.php
-      
-    - name: Move Admin config file
-      copy:
-        src: /var/www/html/admin/config-dist.php
-        dest: /var/www/html/admin/config.php
+      raw: cp /var/www/html/config-dist.php /var/www/html/config.php && cp /var/www/html/admin/config-dist.php /var/www/html/admin/config.php
+
+    - name: Fix permission
+      file:
+        path: /var/www/
+        owner: www-data
+        group: www-data
+        recurse: yes
       
     - name: Restart apache                                                                
       service:                                                                            
