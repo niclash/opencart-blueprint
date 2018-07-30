@@ -74,13 +74,13 @@
     - name: Set mariadb password
       mysql_user:
         name: root
-        password: "{{ db_name }}"
-        login_password: "{{ db_name }}"
+        password: "{{ db_passwd }}"
+        login_password: "{{ db_passwd }}"
         check_implicit_admin: yes
         state: present
 
     - name: Allow access from network
-      raw: mysql -u root -p"subutai" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY {{ db_name }}; FLUSH PRIVILEGES;";
+      raw: mysql -u root -p"{{ db_passwd }}" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY \"{{ db_passwd }}\"; FLUSH PRIVILEGES;";
       ignore_errors: yes
 
     - name: Download and unzip
