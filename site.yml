@@ -68,14 +68,14 @@
 
     - name: Create opencart database
       mysql_db:
-        name: {{ db_name }}
+        name: "{{ db_name }}"
         state: present
 
     - name: Set mariadb password
       mysql_user:
         name: root
-        password: {{ db_name }}
-        login_password: {{ db_name }}
+        password: "{{ db_name }}"
+        login_password: "{{ db_name }}"
         check_implicit_admin: yes
         state: present
 
