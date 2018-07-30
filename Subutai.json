@@ -31,6 +31,14 @@
             {
                 "key": "domain_name",
                 "value": "${domainName}"
+            },
+            {
+                "key": "db_name",
+                "value": "${dbName}"
+            },
+            {
+                "key": "db_passwd",
+                "value": "${dbPasswd}"
             }
         ],
         "groups": [
@@ -59,6 +67,18 @@
             "description": "Enter the container's hostname",
             "type": "string",
             "default": "opencart",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "dbName": {
+            "description": "Database Name",
+            "type": "string",
+            "default": "opencart",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "dbPasswd": {
+            "description": "Database Root Password",
+            "type": "string",
+            "default": "subutai",
             "validation": "[a-zA-Z0-9]+"
         },
         "containerSize": {

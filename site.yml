@@ -68,19 +68,19 @@
 
     - name: Create opencart database
       mysql_db:
-        name: opencart
+        name: {{ db_name }}
         state: present
 
     - name: Set mariadb password
       mysql_user:
         name: root
-        password: "subutai"
-        login_password: "subutai"
+        password: {{ db_name }}
+        login_password: {{ db_name }}
         check_implicit_admin: yes
         state: present
 
     - name: Allow access from network
-      raw: mysql -u root -p"subutai" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'subutai'; FLUSH PRIVILEGES;";
+      raw: mysql -u root -p"subutai" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY {{ db_name }}; FLUSH PRIVILEGES;";
       ignore_errors: yes
 
     - name: Download and unzip
