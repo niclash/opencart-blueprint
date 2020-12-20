@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "OpenCart",
-    "version": "3.0.2.0",
+    "version": "3.0.3.6",
     "author": "https://github.com/happyaron",
     "containers": [
         {
